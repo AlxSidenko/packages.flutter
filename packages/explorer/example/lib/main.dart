@@ -67,13 +67,19 @@ class _MyAppState extends State<MyApp> {
           const Locale('ru', ''),
           const Locale('fr', ''),
         ],
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
+          backgroundColor: Color(0xFFFFFFFF),
           body: Explorer(
             controller: _controller,
             builder: (_) => [
-              ExplorerToolbar(),
+              ExplorerToolbar(
+                theme: 'Light',
+              ),
               ExplorerActionView(),
-              ExplorerFilesGridView(),
+              ExplorerFilesGridView(
+                theme: 'Light',
+              ),
             ],
             filePressed: filePressed,
           ),

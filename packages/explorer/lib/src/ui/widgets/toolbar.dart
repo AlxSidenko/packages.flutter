@@ -11,9 +11,12 @@ Widget _defaultContainerBuilder(Widget child) => Material(
 
 /// Toolbar view for explorer builder
 class ExplorerToolbar extends StatelessWidget {
+  final String? theme;
+
   const ExplorerToolbar({
     Key? key,
     this.containerBuilder = _defaultContainerBuilder,
+    this.theme,
   }) : super(key: key);
 
   final Widget Function(Widget child) containerBuilder;
@@ -65,22 +68,37 @@ class ExplorerToolbar extends StatelessWidget {
 
     final safeTopPadding = MediaQuery.of(context).padding.top;
 
-    final content = Padding(
+    final content = Container(
       padding: EdgeInsets.only(top: safeTopPadding),
+      color:
+          theme == 'Light' ? const Color(0xFFFFFFFF) : const Color(0xFF242627),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Expanded(child: ExplorerBreadCrumbs()),
+          Expanded(
+            child: ExplorerBreadCrumbs(theme: theme ?? 'Light'),
+          ),
           const VerticalDivider(indent: 8, endIndent: 8),
           Row(
             children: [
               IconButton(
-                icon: const Icon(Icons.refresh),
+                icon: Icon(
+                  Icons.refresh,
+                  color: theme == 'Light'
+                      ? const Color(0xFF333333)
+                      : const Color(0xFFD6D6D6),
+                ),
                 onPressed: controller.refresh,
               ),
               PopupMenuButton<String>(
-                icon: const Icon(Icons.add),
+                color: const Color(0xFFFFFFFF),
+                icon: Icon(
+                  Icons.add,
+                  color: theme == 'Light'
+                      ? const Color(0xFF333333)
+                      : const Color(0xFFD6D6D6),
+                ),
                 onSelected: (String value) async {
                   if (value == 'directory') {
                     final folderName =
@@ -116,18 +134,18 @@ class ExplorerToolbar extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const PopupMenuDivider(),
-                  PopupMenuItem<String>(
-                    value: 'upload',
-                    enabled: controller.hasUploadFilesCallback,
-                    child: Row(
-                      children: <Widget>[
-                        const Icon(Icons.upload_file),
-                        const SizedBox(width: 16),
-                        Text(i18n.uploadFiles),
-                      ],
-                    ),
-                  ),
+                  // const PopupMenuDivider(),
+                  // PopupMenuItem<String>(
+                  //   value: 'upload',
+                  //   enabled: controller.hasUploadFilesCallback,
+                  //   child: Row(
+                  //     children: <Widget>[
+                  //       const Icon(Icons.upload_file),
+                  //       const SizedBox(width: 16),
+                  //       Text(i18n.uploadFiles),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ],

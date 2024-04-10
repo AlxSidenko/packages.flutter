@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 /// Entry view
 class EntryExplorer extends StatefulWidget {
+  final String theme;
   const EntryExplorer({
     required this.entry,
+    required this.theme,
     this.onPressed,
     this.onLongPress,
     Key? key,
@@ -100,6 +102,9 @@ class _EntryExplorerState extends State<EntryExplorer> {
                     width: constraints.maxWidth,
                     child: Icon(
                       iconByEntry(widget.entry),
+                      color: widget.theme == 'Light'
+                          ? const Color(0xFF333333)
+                          : const Color(0xFFD6D6D6),
                       size: 48,
                     ),
                   ),
@@ -117,6 +122,11 @@ class _EntryExplorerState extends State<EntryExplorer> {
                     child: Text(
                       widget.entry.name,
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: widget.theme == 'Light'
+                            ? const Color(0xFF333333)
+                            : const Color(0xFFD6D6D6),
+                      ),
                     ),
                   ),
                 ],

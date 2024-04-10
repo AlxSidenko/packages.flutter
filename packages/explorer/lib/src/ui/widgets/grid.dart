@@ -46,6 +46,7 @@ class _ExplorerFilesGridViewState extends State<ExplorerFilesGridView> {
     final result = await showMenu(
       context: context,
       position: position,
+      color: const Color(0xFFFFFFFF),
       items: <PopupMenuEntry>[
         PopupMenuItem(
           value: 'open',
@@ -129,7 +130,15 @@ class _ExplorerFilesGridViewState extends State<ExplorerFilesGridView> {
           children: <Widget>[
             if (entries.isEmpty)
               SliverFillRemaining(
-                child: Center(child: Text(i18n!.empty)),
+                child: Center(
+                    child: Text(
+                  i18n!.empty,
+                  style: TextStyle(
+                    color: widget.theme == 'Light'
+                        ? const Color(0xFF333333)
+                        : const Color(0xFFD6D6D6),
+                  ),
+                )),
               ),
             LiveSliverGrid(
               controller: ControllerProvider.of(context)!.scrollController!,
@@ -151,6 +160,7 @@ class _ExplorerFilesGridViewState extends State<ExplorerFilesGridView> {
                     ).animate(animation),
                     child: EntryExplorer(
                       entry: entry,
+                      theme: widget.theme ?? 'Light',
                       onPressed: () => _controller.goEntry(entry),
                       onLongPress: (position) =>
                           _showContextMenu(position, entry),

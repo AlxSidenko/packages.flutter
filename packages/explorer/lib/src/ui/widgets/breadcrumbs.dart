@@ -8,7 +8,12 @@ import 'package:flutter_breadcrumb/flutter_breadcrumb.dart';
 
 /// Location (path) breadcrumbs view for explorer builder
 class ExplorerBreadCrumbs extends StatefulWidget {
-  const ExplorerBreadCrumbs({Key? key}) : super(key: key);
+  final String theme;
+
+  const ExplorerBreadCrumbs({
+    Key? key,
+    required this.theme,
+  }) : super(key: key);
 
   @override
   State<ExplorerBreadCrumbs> createState() => _ExplorerBreadCrumbsState();
@@ -57,7 +62,6 @@ class _ExplorerBreadCrumbsState extends State<ExplorerBreadCrumbs>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return StreamBuilder<ExplorerState>(
       initialData: _initialData,
       stream: _controller.stream,
@@ -76,11 +80,21 @@ class _ExplorerBreadCrumbsState extends State<ExplorerBreadCrumbs>
               BreadCrumbItem(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                content: Text(crumb.name, style: theme.textTheme.bodyMedium),
+                content: Text(crumb.name,
+                    style: TextStyle(
+                      color: widget.theme == 'Light'
+                          ? const Color(0xFF333333)
+                          : const Color(0xFFD6D6D6),
+                    )),
                 onTap: () => _controller.go(crumb.path),
               ),
           ],
-          divider: const Icon(Icons.chevron_right),
+          divider: Icon(
+            Icons.chevron_right,
+            color: widget.theme == 'Light'
+                ? const Color(0xFF333333)
+                : const Color(0xFFD6D6D6),
+          ),
         );
       },
     );
