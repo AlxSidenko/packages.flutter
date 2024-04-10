@@ -10,7 +10,13 @@ import 'package:sliver_tools/sliver_tools.dart';
 import 'entry.dart';
 
 class ExplorerFilesGridView extends StatefulWidget {
-  const ExplorerFilesGridView({Key? key}) : super(key: key);
+  final String? theme;
+  final int? crossAxisCount;
+  const ExplorerFilesGridView({
+    Key? key,
+    this.theme,
+    this.crossAxisCount,
+  }) : super(key: key);
 
   @override
   State<ExplorerFilesGridView> createState() => _ExplorerFilesGridViewState();
@@ -156,7 +162,9 @@ class _ExplorerFilesGridViewState extends State<ExplorerFilesGridView> {
               // w400 = 3
               // w1200 = 6
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
+                crossAxisCount: widget.crossAxisCount != null
+                    ? widget.crossAxisCount!
+                    : crossAxisCount,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
               ),
