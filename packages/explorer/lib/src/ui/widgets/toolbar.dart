@@ -5,7 +5,7 @@ import 'package:explorer/src/ui/widgets/fixed_sliver_persistent_header_delegate.
 import 'package:flutter/material.dart';
 
 Widget _defaultContainerBuilder(Widget child) => Material(
-      elevation: 4,
+      elevation: 0,
       child: child,
     );
 
@@ -87,7 +87,7 @@ class ExplorerToolbar extends StatelessWidget {
                   Icons.refresh,
                   color: theme == 'Light'
                       ? const Color(0xFF333333)
-                      : const Color(0xFFD6D6D6),
+                      : const Color(0xFFFFFFFF),
                 ),
                 onPressed: controller.refresh,
               ),
@@ -97,7 +97,7 @@ class ExplorerToolbar extends StatelessWidget {
                   Icons.add,
                   color: theme == 'Light'
                       ? const Color(0xFF333333)
-                      : const Color(0xFFD6D6D6),
+                      : const Color(0xFFFFFFFF),
                 ),
                 onSelected: (String value) async {
                   if (value == 'directory') {

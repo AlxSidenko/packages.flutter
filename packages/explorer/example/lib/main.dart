@@ -69,16 +69,16 @@ class _MyAppState extends State<MyApp> {
         ],
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Color(0xFFFFFFFF),
+          backgroundColor: Color(0xFF242627),
           body: Explorer(
             controller: _controller,
             builder: (_) => [
               ExplorerToolbar(
-                theme: 'Light',
+                theme: 'Dark',
               ),
               ExplorerActionView(),
               ExplorerFilesGridView(
-                theme: 'Light',
+                theme: 'Dark',
               ),
             ],
             filePressed: filePressed,
